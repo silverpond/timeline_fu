@@ -30,8 +30,17 @@ module TimelineFu
             end
             memo
           end
+          
+          if opts[:data]
+            if opts[:data].respond_to?(:call)
+              create_options[:data] = opts[:data].call(self)
+            else
+              create_options[:data] = send(opts[:data])
+            end
+          end
           create_options[:event_type] = event_type.to_s
-
+          
+          
           TimelineEvent.create!(create_options)
         end
 
