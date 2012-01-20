@@ -5,9 +5,9 @@ module TimelineFu
     end
 
     module ClassMethods
-      def fires(event_type, opts)
-        raise ArgumentError, "Argument :on is mandatory" unless opts.has_key?(:on)
-
+      def fires(event_type, opts = {} )
+        opts[:on] ||= event_type
+        
         # Array provided, set multiple callbacks
         if opts[:on].kind_of?(Array)
           opts[:on].each { |on| fires(event_type, opts.merge({:on => on})) }
