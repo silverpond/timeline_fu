@@ -41,9 +41,9 @@ module TimelineFu
           create_options[:event_type] = event_type.to_s
           
           
-          TimelineEvent.create!(create_options)
+          TimelineEvent.create(create_options)
         end
-
+        
         send(:"after_#{opts[:on]}", method_name, :if => opts[:if])
       end
     end
